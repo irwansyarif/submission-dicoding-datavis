@@ -50,8 +50,12 @@ with st.sidebar:
     st.title(" ")
 
     # Logo Image
-    st.image("streamlit.png")
-   
+    #st.image("streamlit.png")
+    if os.path.exists("streamlit.png"):
+        st.image("streamlit.png")
+    else:
+        st.error("File not found: streamlit.png")
+
     # Date Range
     start_date, end_date = st.date_input(
         label="Select Date Range",
