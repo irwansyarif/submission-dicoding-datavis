@@ -10,12 +10,32 @@ sns.set(style='dark')
 
 # Dataset
 datetime_cols = ["order_approved_at", "order_delivered_carrier_date", "order_delivered_customer_date", "order_estimated_delivery_date", "order_purchase_timestamp", "shipping_limit_date"]
-all_df = pd.read_csv("../data/all_data.csv")
+#all_df = pd.read_csv("/dashboard/all_data.csv")
+import os
+
+# Get the current directory
+current_dir = os.path.dirname(__file__)
+
+# Construct the file path
+all_data_file = os.path.join(current_dir, 'all_data.csv')
+geolocation_file = os.path.join(current_dir, 'geolocation.csv')
+
+# Dataset
+datetime_cols = ["order_approved_at", "order_delivered_carrier_date", 
+                 "order_delivered_customer_date", "order_estimated_delivery_date", 
+                 "order_purchase_timestamp", "shipping_limit_date"]
+all_df = pd.read_csv(all_data_file)
 all_df.sort_values(by="order_approved_at", inplace=True)
 all_df.reset_index(inplace=True)
 
 # Geolocation Dataset
-geolocation = pd.read_csv('../data/geolocation.csv')
+geolocation = pd.read_csv(geolocation_file)
+data = geolocation.drop_duplicates(subset='customer_unique_id')
+all_df.sort_values(by="order_approved_at", inplace=True)
+all_df.reset_index(inplace=True)
+
+# Geolocation Dataset
+#geolocation = pd.read_csv('/dashboard/geolocation.csv')
 data = geolocation.drop_duplicates(subset='customer_unique_id')
 
 for col in datetime_cols:
