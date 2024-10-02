@@ -49,12 +49,7 @@ with st.sidebar:
     # Title
     st.title(" ")
 
-    # Logo Image
-    #st.image("streamlit.png")
-    if os.path.exists("streamlit.png"):
-        st.image("streamlit.png")
-    else:
-        st.error("File not found: streamlit.png")
+   
 
     # Date Range
     start_date, end_date = st.date_input(
@@ -209,7 +204,7 @@ with tab1:
     plt.xlabel("State")
     plt.ylabel("Number of Customers")
     plt.xticks(fontsize=12)
-    st.pyplot(fig)
+    st.pyplot(fig)  # Pass the figure object to st.pyplot()
 
 with tab2:
     common_status_ = order_status.value_counts().index[0]
@@ -226,7 +221,7 @@ with tab2:
     plt.xlabel("Status")
     plt.ylabel("Count")
     plt.xticks(fontsize=12)
-    st.pyplot(fig)
+    st.pyplot(fig)  # Pass the figure object to st.pyplot()
 
 with tab3:
     map_plot.plot()
